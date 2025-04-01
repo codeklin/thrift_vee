@@ -15,8 +15,10 @@ import { SiteLayout } from "@/components/site-layout"
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const resolvedParams = use(Promise.resolve(params))
-  const product = products.find((p) => p.id === resolvedParams.id) || products[0]
   const [selectedSize, setSelectedSize] = useState("m")
+  const [product, setProduct] = useState(() => {
+    return products.find((p) => p.id === resolvedParams.id) || products[0]
+  })
 
   const handleBuyNow = () => {
     // Format WhatsApp message with product details
